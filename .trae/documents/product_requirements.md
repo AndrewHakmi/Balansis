@@ -1,96 +1,143 @@
-# Balansis: Product Requirements Document
+# Требования к продукту Balansis
 
-## 1. Product Overview
+## 1. Обзор продукта
 
-**Balansis** is a Python mathematical library implementing Absolute Compensation Theory (ACT) - a novel framework replacing traditional zero and infinity with Absolute and Eternity concepts for enhanced computational stability.
+Balansis - это инновационная Python математическая библиотека, реализующая Теорию Абсолютной Компенсации (ACT) для решения проблем численной нестабильности в вычислениях. Библиотека заменяет традиционные ноль и бесконечность на "Абсолют" и "Вечность", обеспечивая стабильные математические операции.
 
-The library addresses fundamental mathematical instabilities (division by zero, overflows) by introducing alternative number types and operations based on balance, structural symmetry, and stability principles. Target users include researchers, developers, and mathematicians working in AI, cryptography, distributed systems, physics, and finance who need stable mathematical operations without traditional zero/infinity limitations.
+Продукт решает критические проблемы численной нестабильности в научных вычислениях, машинном обучении и математическом моделировании, предоставляя разработчикам и исследователям надежные инструменты для высокоточных вычислений.
 
-## 2. Core Features
+Целевая аудитория включает исследователей в области машинного обучения, разработчиков научного ПО, математиков и инженеров, работающих с численными методами.
 
-### 2.1 User Roles
+## 2. Основные функции
 
-| Role | Registration Method | Core Permissions |
-|------|---------------------|------------------|
-| Library User | Python package installation | Can import and use all mathematical operations, create AbsoluteValue and EternalRatio objects |
-| Developer/Contributor | GitHub repository access | Can extend library functionality, contribute to core modules, run test suites |
-| Researcher | Documentation access | Can access theoretical foundations, examples, and advanced mathematical concepts |
+### 2.1 Роли пользователей
 
-### 2.2 Feature Module
+| Роль | Метод регистрации | Основные права |
+|------|-------------------|----------------|
+| Разработчик | Установка через pip/conda | Может использовать все функции библиотеки, создавать приложения |
+| Исследователь | Установка + доступ к документации | Может проводить эксперименты, использовать расширенные функции |
+| Контрибьютор | GitHub аккаунт + форк репозитория | Может вносить изменения в код, предлагать улучшения |
 
-Our mathematical library consists of the following main modules:
+### 2.2 Модули функций
 
-1. **Core Mathematical Types**: AbsoluteValue class with magnitude/direction properties, EternalRatio for structural ratios, fundamental ACT operations.
-2. **Algebraic Structures**: Absolute group operations, eternity field mathematics, advanced algebraic manipulations.
-3. **Compensation Logic**: Compensation engine for balance calculations, stability verification, structural invariant maintenance.
-4. **Utilities and Visualization**: Plotting tools for mathematical concepts, helper functions, data conversion utilities.
-5. **Examples and Documentation**: Jupyter notebooks with usage demos, comprehensive API documentation, theoretical explanations.
+Наши требования к продукту Balansis состоят из следующих основных компонентов:
 
-### 2.3 Page Details
+1. **Основная библиотека**: ядро ACT, классы AbsoluteValue и EternalRatio, компенсатор
+2. **Модуль TNSIM**: теория нулевых сумм бесконечных множеств, высокоточные вычисления
+3. **Документация**: API справочник, руководства пользователя, примеры использования
+4. **Тестирование**: модульные тесты, интеграционные тесты, бенчмарки производительности
+5. **Интеграция BalansisLLM**: нейронные сети с ACT, стабилизация градиентов
 
-| Module Name | Component Name | Feature Description |
-|-------------|----------------|---------------------|
-| Core Types | AbsoluteValue | Create values with magnitude and direction (+1/-1), perform compensated addition, inversion operations, convert to standard float |
-| Core Types | EternalRatio | Calculate invariant ratios between AbsoluteValues, maintain structural stability, provide ratio value extraction |
-| Core Types | Operations | Implement compensated arithmetic, comparison operations, mathematical transformations following ACT axioms |
-| Algebraic Structures | AbsoluteGroup | Define group operations on Absolute values, ensure closure and associativity, implement group theory concepts |
-| Algebraic Structures | EternityField | Create field structure for eternal ratios, support field operations, maintain mathematical consistency |
-| Compensation Logic | Compensator | Balance calculation engine, stability verification algorithms, structural invariant checking |
-| Utilities | Plotting | Visualize AbsoluteValue relationships, plot compensation patterns, create mathematical diagrams |
-| Examples | Jupyter Notebooks | Interactive demos for each concept, step-by-step tutorials, practical application examples |
+### 2.3 Детали страниц
 
-## 3. Core Process
+| Компонент | Модуль | Описание функций |
+|-----------|--------|------------------|
+| Основная библиотека | AbsoluteValue | Создание стабильных значений с величиной и направлением. Компенсированные арифметические операции. Валидация входных данных |
+| Основная библиотека | EternalRatio | Работа с бесконечными отношениями. Операции деления без потери точности. Стабилизация результатов |
+| Основная библиотека | Compensator | Автоматическая компенсация ошибок округления. Стабилизация численных операций. Адаптивные алгоритмы |
+| TNSIM | ZeroSumSets | Создание и управление множествами нулевой суммы. Операции с бесконечными множествами. Анализ сходимости |
+| TNSIM | HighPrecision | Высокоточные вычисления с компенсацией ошибок. Параллельные вычисления. Кэширование результатов |
+| Документация | API Reference | Автоматическая генерация документации из docstrings. Интерактивные примеры. Поиск по API |
+| Документация | Tutorials | Пошаговые руководства для начинающих. Продвинутые техники. Практические примеры |
+| Тестирование | Unit Tests | Покрытие всех классов и методов. Тестирование граничных случаев. Автоматический запуск |
+| Тестирование | Benchmarks | Измерение производительности. Сравнение с традиционными методами. Профилирование памяти |
+| BalansisLLM | ACT Transformer | Интеграция ACT в архитектуру трансформера. Стабилизация весов и градиентов. Оптимизированное внимание |
 
-**Primary User Flow - Mathematical Operations:**
-1. User imports Balansis library components
-2. Creates AbsoluteValue objects with magnitude and direction
-3. Performs compensated operations (addition, inversion, comparison)
-4. Calculates EternalRatios for structural analysis
-5. Visualizes results using plotting utilities
-6. Validates stability using compensation logic
+## 3. Основные процессы
 
-**Developer Flow - Library Extension:**
-1. Developer accesses source code and documentation
-2. Implements new mathematical operations following ACT principles
-3. Adds comprehensive tests with >95% coverage
-4. Updates documentation and examples
-5. Submits contributions through version control
+### Поток разработчика
+Разработчик устанавливает библиотеку через pip, изучает документацию, создает AbsoluteValue объекты, выполняет компенсированные операции, интегрирует в свое приложение, тестирует результаты и развертывает решение.
+
+### Поток исследователя  
+Исследователь получает доступ к библиотеке, изучает теоретические основы ACT, проводит эксперименты с TNSIM, анализирует результаты, публикует исследования и делится открытиями с сообществом.
+
+### Поток контрибьютора
+Контрибьютор форкает репозиторий, изучает архитектуру кода, вносит изменения или исправления, создает pull request, проходит код-ревью и интегрирует изменения в основную ветку.
 
 ```mermaid
 graph TD
-    A[Import Balansis] --> B[Create AbsoluteValue]
-    B --> C[Perform Operations]
-    C --> D[Calculate EternalRatio]
-    D --> E[Visualize Results]
-    E --> F[Validate Stability]
-    F --> G[Export/Save Results]
+    A[Установка Balansis] --> B[Изучение документации]
+    B --> C[Создание AbsoluteValue]
+    C --> D[Выполнение операций]
+    D --> E[Интеграция в приложение]
+    E --> F[Тестирование]
+    F --> G[Развертывание]
     
-    H[Developer Access] --> I[Extend Functionality]
-    I --> J[Add Tests]
-    J --> K[Update Documentation]
-    K --> L[Submit Contribution]
+    H[Доступ к TNSIM] --> I[Эксперименты]
+    I --> J[Анализ результатов]
+    J --> K[Публикация исследований]
+    
+    L[Форк репозитория] --> M[Разработка]
+    M --> N[Pull Request]
+    N --> O[Код-ревью]
+    O --> P[Интеграция]
 ```
 
-## 4. User Interface Design
+## 4. Дизайн пользовательского интерфейса
 
-### 4.1 Design Style
+### 4.1 Стиль дизайна
 
-- **Primary Colors**: Deep blue (#1e3a8a) for stability, gold (#f59e0b) for balance concepts
-- **Secondary Colors**: Gray (#6b7280) for neutral elements, green (#10b981) for successful operations
-- **Code Style**: Monospace fonts (Consolas, Monaco) for mathematical expressions and code
-- **Documentation Style**: Clean, academic layout with clear mathematical notation
-- **Icon Style**: Geometric symbols representing balance, infinity alternatives, mathematical operations
-- **Layout**: Modular design with clear separation between theoretical concepts and practical implementation
+- **Основные цвета**: Синий (#2E86AB) для стабильности, зеленый (#A23B72) для компенсации
+- **Вторичные цвета**: Серый (#F18F01) для нейтральных элементов, белый (#C73E1D) для фона
+- **Стиль кнопок**: Закругленные углы с тенью, градиентная заливка
+- **Шрифты**: Source Code Pro для кода (14px), Inter для текста (16px), заголовки (24px)
+- **Стиль макета**: Карточный дизайн с четкой иерархией, боковая навигация
+- **Иконки**: Математические символы (∞, ∑, ⊕), стрелки компенсации, графики стабильности
 
-### 4.2 Page Design Overview
+### 4.2 Обзор дизайна страниц
 
-| Module Name | Component Name | UI Elements |
-|-------------|----------------|-------------|
-| Documentation | API Reference | Clean typography with syntax highlighting, mathematical notation rendering, interactive code examples |
-| Examples | Jupyter Notebooks | Rich mathematical output, inline plots, step-by-step explanations with visual aids |
-| Visualization | Plotting Tools | Interactive charts showing AbsoluteValue relationships, compensation patterns, stability metrics |
-| Testing | Test Interface | Clear pass/fail indicators, coverage reports, performance metrics display |
+| Компонент | Модуль | UI элементы |
+|-----------|--------|-------------|
+| Документация | Главная страница | Логотип Balansis, навигационное меню, карточки основных функций, интерактивные примеры кода с подсветкой синтаксиса |
+| Документация | API Reference | Древовидная навигация по классам, поиск в реальном времени, код-блоки с кнопками копирования, интерактивные диаграммы |
+| Документация | Tutorials | Пошаговые инструкции с прогресс-баром, встроенные примеры кода, визуализация результатов, кнопки "Попробовать" |
+| Тестирование | Test Dashboard | Графики покрытия кода, результаты тестов в реальном времени, бенчмарки производительности, цветовая индикация статуса |
+| TNSIM | Interactive Demo | Визуализация бесконечных множеств, слайдеры для параметров, графики сходимости, анимации компенсации |
+| BalansisLLM | Model Interface | Панель управления моделью, визуализация архитектуры, метрики стабильности, интерактивные графики обучения |
 
-### 4.3 Responsiveness
+### 4.3 Адаптивность
 
-The library is primarily designed for development environments and Jupyter notebooks. Documentation should be responsive for web viewing, with mathematical notation properly rendered across devices. Interactive examples should work in both desktop and tablet environments for educational purposes.
+Продукт ориентирован на desktop-first подход с адаптацией для планшетов. Основная аудитория работает на рабочих станциях для научных вычислений. Мобильная версия предоставляет доступ к документации и простым примерам. Оптимизация для сенсорного взаимодействия включает увеличенные кнопки и жесты прокрутки для графиков.
+
+## 5. Технические требования
+
+### 5.1 Производительность
+- Операции с AbsoluteValue должны выполняться не медленнее чем в 2 раза по сравнению с float
+- TNSIM должен обрабатывать множества до 10^6 элементов за разумное время
+- Память: оптимизированное использование для больших наборов данных
+
+### 5.2 Совместимость
+- Python 3.8+ поддержка
+- Совместимость с NumPy, SciPy, PyTorch
+- Кроссплатформенность: Windows, macOS, Linux
+- Интеграция с Jupyter Notebook
+
+### 5.3 Качество кода
+- Покрытие тестами не менее 90%
+- Соответствие PEP 8 стандартам
+- Типизация с mypy
+- Документация для всех публичных API
+
+## 6. Критерии приемки
+
+### 6.1 Функциональные критерии
+- Все основные классы (AbsoluteValue, EternalRatio, Compensator) работают корректно
+- TNSIM выполняет операции с бесконечными множествами
+- Документация полная и актуальная
+- Тесты проходят на всех поддерживаемых платформах
+
+### 6.2 Качественные критерии
+- Численная стабильность превосходит традиционные методы
+- Производительность приемлема для практического использования
+- API интуитивно понятен для целевой аудитории
+- Документация помогает быстро начать работу
+
+### 6.3 Интеграционные критерии
+- Успешная интеграция с популярными научными библиотеками
+- BalansisLLM демонстрирует практическую применимость
+- Примеры работают без ошибок
+- Установка через pip проходит без проблем
+
+---
+
+*Документ описывает требования к математической библиотеке Balansis и связанным компонентам экосистемы*

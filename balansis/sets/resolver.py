@@ -40,3 +40,27 @@ def verify_zero_sum(result_set: EternalSet, threshold: int = 1000):
                 continue
         residuals.append(x)
     return residuals
+
+def stream_compensate(iter1, iter2, limit: int | None = None):
+    zero = AbsoluteValue.absolute()
+    count = 0
+    for a, b in itertools.zip_longest(iter1, iter2, fillvalue=zero):
+        r = a + b
+        if r.is_absolute():
+            pass
+        else:
+            yield r
+        count += 1
+        if limit is not None and count >= limit:
+            break
+
+def convergence_detector(result_iter, window: int = 100, tol: float = 1e-12) -> bool:
+    buf = []
+    for x in result_iter:
+        buf.append(x)
+        if len(buf) > window:
+            buf.pop(0)
+        if len(buf) == window:
+            if all(v.is_absolute() or abs(v.magnitude) <= tol for v in buf):
+                return True
+    return False

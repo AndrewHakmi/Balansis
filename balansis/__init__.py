@@ -25,6 +25,9 @@ from balansis.core.operations import Operations
 from balansis.logic.compensator import Compensator
 from balansis.algebra.absolute_group import AbsoluteGroup
 from balansis.algebra.eternity_field import EternityField
+from balansis.sets.eternal_set import EternalSet
+from balansis.sets.resolver import global_compensate
+from balansis.sets.generators import harmonic_generator, grandis_generator
 # from balansis.utils.plot import PlotUtils  # Temporarily disabled
 
 __version__ = "0.1.0"
@@ -55,6 +58,10 @@ __all__ = [
     "Compensator",
     "AbsoluteGroup",
     "EternityField",
+    "EternalSet",
+    "global_compensate",
+    "harmonic_generator",
+    "grandis_generator",
     # "PlotUtils",  # Temporarily disabled
     "ABSOLUTE",
     "UNIT_POSITIVE",

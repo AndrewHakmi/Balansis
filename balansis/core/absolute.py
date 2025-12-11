@@ -230,6 +230,13 @@ class AbsoluteValue(BaseModel):
             return "AbsoluteValue(Absolute)"
         direction_str = "+" if self.direction > 0 else "-"
         return f"AbsoluteValue({self.magnitude}, {direction_str})"
+
+    def __getstate__(self):
+        return {"magnitude": self.magnitude, "direction": self.direction}
+
+    def __setstate__(self, state):
+        object.__setattr__(self, "magnitude", state["magnitude"])
+        object.__setattr__(self, "direction", state["direction"])
     
     def inverse(self) -> 'AbsoluteValue':
         """Calculate the multiplicative inverse.
@@ -250,6 +257,25 @@ class AbsoluteValue(BaseModel):
             magnitude=1.0 / self.magnitude,
             direction=self.direction
         )
+
+    def log(self) -> float:
+        v = self.to_float()
+        if v <= 0.0:
+            raise ValueError('Log undefined for non-positive values')
+        return math.log(v)
+
+    def exp(self) -> 'AbsoluteValue':
+        v = self.to_float()
+        return AbsoluteValue(magnitude=math.exp(abs(v)), direction=1)
+
+    def sin(self) -> float:
+        return math.sin(self.to_float())
+
+    def cos(self) -> float:
+        return math.cos(self.to_float())
+
+    def tan(self) -> float:
+        return math.tan(self.to_float())
     
     def to_float(self) -> float:
         """Convert to standard Python float.

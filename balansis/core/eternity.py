@@ -179,6 +179,13 @@ class EternalRatio(BaseModel):
     def __str__(self) -> str:
         """Human-readable string representation."""
         return f"EternalRatio({self.numerator}) / ({self.denominator}) = {self.numerical_value():.6f}"
+
+    def __getstate__(self):
+        return {"numerator": self.numerator, "denominator": self.denominator}
+
+    def __setstate__(self, state):
+        object.__setattr__(self, "numerator", state["numerator"])
+        object.__setattr__(self, "denominator", state["denominator"])
     
     def __mul__(self, other) -> 'EternalRatio':
         """Multiply eternal ratio by another ratio or scalar.
@@ -307,6 +314,25 @@ class EternalRatio(BaseModel):
             New EternalRatio representing the reciprocal
         """
         return self.inverse()
+
+    def log(self) -> float:
+        v = self.numerical_value()
+        if v <= 0.0:
+            raise ValueError('Log undefined for non-positive ratios')
+        return math.log(v)
+
+    def exp(self) -> 'EternalRatio':
+        v = self.numerical_value()
+        return EternalRatio.from_float(math.exp(v))
+
+    def sin(self) -> float:
+        return math.sin(self.numerical_value())
+
+    def cos(self) -> float:
+        return math.cos(self.numerical_value())
+
+    def tan(self) -> float:
+        return math.tan(self.numerical_value())
     
     def power(self, exponent: float) -> 'EternalRatio':
         """Raise the ratio to a power.

@@ -186,6 +186,23 @@ class EternalRatio(BaseModel):
     def __setstate__(self, state):
         object.__setattr__(self, "numerator", state["numerator"])
         object.__setattr__(self, "denominator", state["denominator"])
+
+    def to_json(self):
+        return {"type": "EternalRatio", "value": self.numerical_value(), "structural_dump": {"numerator": self.numerator.to_float(), "denominator": self.denominator.to_float()}}
+
+    @classmethod
+    def __get_validators__(cls):
+        def validate(v):
+            if isinstance(v, EternalRatio):
+                return v
+            if isinstance(v, (int, float)):
+                return EternalRatio.from_float(float(v))
+            if isinstance(v, dict) and "numerator" in v and "denominator" in v:
+                num = AbsoluteValue.from_float(float(v["numerator"])) if not isinstance(v["numerator"], AbsoluteValue) else v["numerator"]
+                den = AbsoluteValue.from_float(float(v["denominator"])) if not isinstance(v["denominator"], AbsoluteValue) else v["denominator"]
+                return EternalRatio(numerator=num, denominator=den)
+            raise TypeError("invalid EternalRatio input")
+        yield validate
     
     def __mul__(self, other) -> 'EternalRatio':
         """Multiply eternal ratio by another ratio or scalar.
@@ -240,6 +257,26 @@ class EternalRatio(BaseModel):
             return EternalRatio(numerator=new_numerator, denominator=self.denominator)
         else:
             return NotImplemented
+
+    def __radd__(self, left) -> 'EternalRatio':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return EternalRatio.from_float(float(left)) + self
+        return NotImplemented
+
+    def __rsub__(self, left) -> 'EternalRatio':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return EternalRatio.from_float(float(left)) - self
+        return NotImplemented
+
+    def __rmul__(self, left) -> 'EternalRatio':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return self * float(left)
+        return NotImplemented
+
+    def __rtruediv__(self, left) -> 'EternalRatio':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return EternalRatio.from_float(float(left)) / self
+        return NotImplemented
     
     def __add__(self, other: 'EternalRatio') -> 'EternalRatio':
         """Add two eternal ratios with common denominator.

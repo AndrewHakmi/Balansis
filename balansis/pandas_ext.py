@@ -53,6 +53,18 @@ try:
                 return AbsoluteArray(list(arr))
             return arr
 
+        @classmethod
+        def _from_sequence(cls, scalars, dtype=None, copy=False):
+            vals = []
+            for s in scalars:
+                if isinstance(s, AbsoluteValue):
+                    vals.append(s)
+                elif isinstance(s, (int, float)):
+                    vals.append(AbsoluteValue.from_float(float(s)))
+                else:
+                    vals.append(s)
+            return cls(vals)
+
         def _formatter(self, boxed=False):
             return lambda v: str(v)
 

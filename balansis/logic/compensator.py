@@ -547,3 +547,14 @@ class Compensator:
         return (f"Compensator: {summary['compensated_operations']}/{summary['total_operations']} "
                 f"operations compensated ({summary['compensation_rate']:.1%} rate), "
                 f"avg stability: {summary['average_stability']:.3f}")
+
+    def compensate_array(self, arr_a: List[AbsoluteValue], arr_b: List[AbsoluteValue]) -> List[AbsoluteValue]:
+        out: List[AbsoluteValue] = []
+        n = min(len(arr_a), len(arr_b))
+        for i in range(n):
+            out.append(self.compensate_addition(arr_a[i], arr_b[i]))
+        for j in range(n, len(arr_a)):
+            out.append(arr_a[j])
+        for j in range(n, len(arr_b)):
+            out.append(arr_b[j])
+        return [v for v in out if not v.is_absolute()]

@@ -75,3 +75,12 @@ __all__ = [
     "ACT_ABSOLUTE_THRESHOLD",
     "ACT_COMPENSATION_FACTOR",
 ]
+def B(value):
+    if isinstance(value, (int, float)):
+        return AbsoluteValue.from_float(float(value))
+    if isinstance(value, str):
+        v = float(value)
+        return AbsoluteValue.from_float(v)
+    if isinstance(value, AbsoluteValue):
+        return value
+    raise TypeError("unsupported type for AbsoluteValue alias")

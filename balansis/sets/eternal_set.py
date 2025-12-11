@@ -2,6 +2,7 @@ from typing import Iterable, Iterator, Optional
 from balansis.core.absolute import AbsoluteValue
 
 class EternalSet:
+    __slots__ = ("_source", "is_infinite", "rule_name")
     def __init__(self, source: Iterable[AbsoluteValue], is_infinite: bool = False, rule_name: str = "custom"):
         self._source = source
         self.is_infinite = bool(is_infinite)

@@ -64,7 +64,7 @@ class AbsoluteValue(BaseModel):
             raise ValueError('Direction must be exactly +1 or -1')
         return v
     
-    def __add__(self, other: 'AbsoluteValue') -> 'AbsoluteValue':
+    def __add__(self, other: Any) -> 'AbsoluteValue':
         """Compensated addition following ACT principles.
         
         Rules:
@@ -78,6 +78,11 @@ class AbsoluteValue(BaseModel):
         Returns:
             New AbsoluteValue representing the compensated sum
         """
+        if not isinstance(other, AbsoluteValue):
+            if isinstance(other, (int, float)) and math.isfinite(other):
+                other = AbsoluteValue.from_float(float(other))
+            else:
+                return NotImplemented
         if self.direction == other.direction:
             # Same direction: magnitudes add
             return AbsoluteValue(
@@ -100,7 +105,7 @@ class AbsoluteValue(BaseModel):
                 # Perfect compensation: equal magnitudes, different directions
                 return AbsoluteValue(magnitude=0.0, direction=1)
     
-    def __sub__(self, other: 'AbsoluteValue') -> 'AbsoluteValue':
+    def __sub__(self, other: Any) -> 'AbsoluteValue':
         """Compensated subtraction.
         
         Implemented as addition with inverted direction of the second operand.
@@ -111,10 +116,12 @@ class AbsoluteValue(BaseModel):
         Returns:
             New AbsoluteValue representing the difference
         """
-        inverted_other = AbsoluteValue(
-            magnitude=other.magnitude,
-            direction=-other.direction
-        )
+        if not isinstance(other, AbsoluteValue):
+            if isinstance(other, (int, float)) and math.isfinite(other):
+                other = AbsoluteValue.from_float(float(other))
+            else:
+                return NotImplemented
+        inverted_other = AbsoluteValue(magnitude=other.magnitude, direction=-other.direction)
         return self + inverted_other
     
     def __mul__(self, scalar: Union[float, int]) -> 'AbsoluteValue':
@@ -140,6 +147,21 @@ class AbsoluteValue(BaseModel):
     def __rmul__(self, scalar: Union[float, int]) -> 'AbsoluteValue':
         """Right scalar multiplication (commutative)."""
         return self.__mul__(scalar)
+
+    def __radd__(self, left: Any) -> 'AbsoluteValue':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return AbsoluteValue.from_float(float(left)) + self
+        return NotImplemented
+
+    def __rsub__(self, left: Any) -> 'AbsoluteValue':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return AbsoluteValue.from_float(float(left)) - self
+        return NotImplemented
+
+    def __rtruediv__(self, left: Any) -> 'AbsoluteValue':
+        if isinstance(left, (int, float)) and math.isfinite(left):
+            return AbsoluteValue.from_float(float(left)) / self.to_float()
+        return NotImplemented
     
     def __truediv__(self, scalar: Union[float, int]) -> 'AbsoluteValue':
         """Scalar division.
@@ -237,6 +259,21 @@ class AbsoluteValue(BaseModel):
     def __setstate__(self, state):
         object.__setattr__(self, "magnitude", state["magnitude"])
         object.__setattr__(self, "direction", state["direction"])
+
+    def to_json(self):
+        return {"type": "AbsoluteValue", "magnitude": self.magnitude, "direction": self.direction}
+
+    @classmethod
+    def __get_validators__(cls):
+        def validate(v):
+            if isinstance(v, AbsoluteValue):
+                return v
+            if isinstance(v, (int, float)):
+                return AbsoluteValue.from_float(float(v))
+            if isinstance(v, dict) and "magnitude" in v and "direction" in v:
+                return AbsoluteValue(magnitude=float(v["magnitude"]), direction=int(v["direction"]))
+            raise TypeError("invalid AbsoluteValue input")
+        yield validate
     
     def inverse(self) -> 'AbsoluteValue':
         """Calculate the multiplicative inverse.

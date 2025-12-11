@@ -57,9 +57,23 @@ poetry install
 poetry shell
 ```
 
-### Using pip
+### Using pip (Coming Soon)
 ```bash
+# Package will be available on PyPI soon
 pip install balansis
+```
+
+### Development Installation
+```bash
+# Clone the repository
+git clone https://github.com/your-username/balansis.git
+cd balansis
+
+# Install with pip in development mode
+pip install -e .
+
+# Or install with all development dependencies
+pip install -e ".[dev]"
 ```
 
 ## 🚀 Quick Start
@@ -148,6 +162,11 @@ balansis/
 ```
 
 ## 📚 Documentation & Examples
+
+### Complete Documentation
+- **[ACT Whitepaper](docs/theory/act_whitepaper.md)** - Formal mathematical specification
+- **[Algebraic Proofs](docs/theory/algebraic_proofs.md)** - Theoretical foundations and proofs
+- **[Precision & Stability Guide](docs/guide/precision_and_stability.md)** - Practical recommendations
 
 ### Interactive Examples
 Explore the `examples/` directory for comprehensive Jupyter notebooks:
@@ -248,9 +267,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [Coming Soon]
+- **Documentation**: [docs/](docs/) - Complete theoretical and practical guides
 - **Issues**: [GitHub Issues](https://github.com/your-username/balansis/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/your-username/balansis/discussions)
+
+## 🔬 Research & Academic Use
+
+Balansis implements novel mathematical concepts suitable for academic research:
+
+- **Formal ACT Specification**: Complete mathematical framework with proofs
+- **Comparative Analysis**: Benchmarks against traditional methods (IEEE 754, Kahan, Decimal)
+- **Stability Guarantees**: Theoretical error bounds and convergence properties
+- **Reproducible Results**: Deterministic algorithms for scientific computing
+
+For academic citations and research collaboration, please refer to our [theoretical documentation](docs/theory/).
 
 ---
 
